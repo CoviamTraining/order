@@ -1,80 +1,108 @@
-package com.coviam.ecomm.ecomm;
+package com.coviam.ecomm.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Orders", uniqueConstraints = { @UniqueConstraint(columnNames = "Order_Num") })
+@Table(name = "eorder")
 public class Order implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private int orderNum;
-    private int orderAmount;
-    private Timestamp orderTimestamp;
-    private String customerEmail;
-    private int quantity;
-    private String orderStatus;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Order_Id", nullable = false, length = 10)
-    public int getOrderNum() {
-        return orderNum;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
+	@Id
+	@SequenceGenerator(name = "orderSeq", sequenceName = "Order_SEQ", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orderSeq")
+	
+	private long orderId;
+	private String userId;
+	private double totalCost;
+	private String orderDate;
+	private String orderDetails;
 
-    @Column(name = "Order_Amount", nullable = false, length = 6)
-    public int getOrderAmount() {
-        return orderAmount;
-    }
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "ORDER_PRODUCT", joinColumns = { @JoinColumn(name = "orderId") }, inverseJoinColumns = {
+//			@JoinColumn(name = "productId") })
+//	List<Product> listOfProducts = new ArrayList<Product>();
 
-    public void setOrderAmount(int orderAmount) {
-        this.orderAmount = orderAmount;
-    }
+	public Order() {
+	}
 
-    @Column(name = "Order_Timestamp", nullable = false)
-    public Timestamp getOrderTimestamp() {
-        return orderTimestamp;
-    }
+//	public Order(long orderId, String userId, double totalCost, String orderDate, String orderDetails,
+//			List<Product> listOfProducts) {
+//		super();
+//		this.orderId = orderId;
+//		this.userId = userId;
+//		this.totalCost = totalCost;
+//		this.orderDate = orderDate;
+//		this.orderDetails = orderDetails;
+//		this.listOfProducts = listOfProducts;
+//	}
 
-    public void setOrderTimestamp(Timestamp orderTimestamp) {
-        this.orderTimestamp = orderTimestamp;
-    }
+	public Order(long orderId, String userId, double totalCost, String orderDate, String orderDetails) {
+		super();
+		this.orderId = orderId;
+		this.userId = userId;
+		this.totalCost = totalCost;
+		this.orderDate = orderDate;
+		this.orderDetails = orderDetails;
+	}
 
-    @Column(name = "Customer_Email", nullable = false, length = 30)
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
+	public long getOrderId() {
+		return orderId;
+	}
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
 
-    @Column(name = "Order_Quantity", nullable = false, length = 2)
-    public int getQuantity() {
-        return quantity;
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-    @Column(name = "Order_Status", length = 10, nullable = false)
-    public String getOrderStatus() {
-        return orderStatus;
-    }
+	public double getTotalCost() {
+		return totalCost;
+	}
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(String orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+//	public List<Product> getListOfProducts() {
+//		return listOfProducts;
+//	}
+//
+//	public void setListOfProducts(List<Product> listOfProducts) {
+//		this.listOfProducts = listOfProducts;
+//	}
 }
