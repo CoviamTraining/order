@@ -1,85 +1,80 @@
 package com.coviam.ecomm.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "eorder")
-public class Order implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Table(name = "orders")
+public class Order {
 
 	@Id
-	@SequenceGenerator(name = "orderSeq", sequenceName = "Order_SEQ", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orderSeq")
-	
-	private long orderId;
-	private String userId;
-	private double totalCost;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int orderId;
+	@Column(name = "ProductId")
+	private int productId;
+	@Column(name = "MerchantId")
+	private int merchantId;
+	@Column(name = "UserEmail")
+	private String userEmail;
+	@Column(name = "OrderQuantity")
+	private int orderQuantity;
+	@Column(name = "OrderDate")
 	private String orderDate;
-	private String orderDetails;
+	@Column(name = "OrderStatus")
+	private String orderStatus;
 
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name = "ORDER_PRODUCT", joinColumns = { @JoinColumn(name = "orderId") }, inverseJoinColumns = {
-//			@JoinColumn(name = "productId") })
-//	List<Product> listOfProducts = new ArrayList<Product>();
-
-	public Order() {
-	}
-
-//	public Order(long orderId, String userId, double totalCost, String orderDate, String orderDetails,
-//			List<Product> listOfProducts) {
-//		super();
-//		this.orderId = orderId;
-//		this.userId = userId;
-//		this.totalCost = totalCost;
-//		this.orderDate = orderDate;
-//		this.orderDetails = orderDetails;
-//		this.listOfProducts = listOfProducts;
-//	}
-
-	public Order(long orderId, String userId, double totalCost, String orderDate, String orderDetails) {
-		super();
-		this.orderId = orderId;
-		this.userId = userId;
-		this.totalCost = totalCost;
+	public Order(int productId, int merchantId, String userEmail, int orderQuantity, String orderDate,
+			String orderStatus) {
+		this.productId = productId;
+		this.merchantId = merchantId;
+		this.userEmail = userEmail;
+		this.orderQuantity = orderQuantity;
 		this.orderDate = orderDate;
-		this.orderDetails = orderDetails;
+		this.orderStatus = orderStatus;
 	}
 
 	public long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(long orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public long getProductId() {
+		return productId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
-	public double getTotalCost() {
-		return totalCost;
+	public long getMerchantId() {
+		return merchantId;
 	}
 
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
+	public void setMerchantId(int merchantId) {
+		this.merchantId = merchantId;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public long getOrderQuantity() {
+		return orderQuantity;
+	}
+
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
 	}
 
 	public String getOrderDate() {
@@ -90,19 +85,18 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public String getOrderDetails() {
-		return orderDetails;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setOrderDetails(String orderDetails) {
-		this.orderDetails = orderDetails;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
-//	public List<Product> getListOfProducts() {
-//		return listOfProducts;
-//	}
-//
-//	public void setListOfProducts(List<Product> listOfProducts) {
-//		this.listOfProducts = listOfProducts;
-//	}
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", productId=" + productId + ", merchantId=" + merchantId + ", userEmail="
+				+ userEmail + ", orderQuantity=" + orderQuantity + ", orderDate=" + orderDate + ", orderStatus="
+				+ orderStatus + "]";
+	}
 }

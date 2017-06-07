@@ -1,4 +1,4 @@
-package com.coviam.ecomm.ecomm;
+package com.coviam.ecomm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
