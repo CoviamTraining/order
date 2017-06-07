@@ -26,6 +26,11 @@ public class Order {
 	private String orderDate;
 	@Column(name = "OrderStatus")
 	private String orderStatus;
+	@Column(name = "ProductPrice")
+	private double productPrice;
+
+	public Order() {
+	}
 
 	public Order(int productId, int merchantId, String userEmail, int orderQuantity, String orderDate,
 			String orderStatus) {
@@ -93,10 +98,18 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 
+	public double getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", productId=" + productId + ", merchantId=" + merchantId + ", userEmail="
 				+ userEmail + ", orderQuantity=" + orderQuantity + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + "]";
+				+ orderStatus + ", productPrice=" + productPrice + "]";
 	}
 }
