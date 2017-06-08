@@ -15,43 +15,34 @@ public class ProductNameImageRating {
 
 	public ProductNameImageRating() {
 	}
-
 	public int getProductid() {
 		return productid;
 	}
-
 	public void setProductid(int productid) {
 		this.productid = productid;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getImageurl() {
 		return imageurl;
 	}
-
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
-
 	public double getRating() {
 		return rating;
 	}
-
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ProductNameImageRating [productid=" + productid + ", name=" + name + ", imageurl=" + imageurl
 				+ ", rating=" + rating + "]";
 	}
-
 }

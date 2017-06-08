@@ -1,12 +1,13 @@
 package com.coviam.ecomm.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import com.coviam.ecomm.dao.OrderRepository;
 import com.coviam.ecomm.entity.Order;
 import com.coviam.ecomm.entity.OrderDetails;
@@ -20,6 +21,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 
 	private RestTemplate restTemplate = new RestTemplate();
+	private Date date;
+	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 	@Override
 	public List<OrderToShow> findOrderByuserEmail(String userEmail) {
@@ -33,7 +36,6 @@ public class OrderServiceImpl implements OrderService {
 			orderToShowTemp.setOrderNo(order.getOrderNo());
 
 			OrderDetails orderdDetailTemp = new OrderDetails();
-
 			orderdDetailTemp.setProductPrice(order.getProductPrice());
 			orderdDetailTemp.setProductQuantity(order.getOrderQuantity());
 
@@ -55,17 +57,15 @@ public class OrderServiceImpl implements OrderService {
 			System.out.println(orderdDetailTemp.toString());
 
 			orderToShowTemp.setOrderitems(orderdDetailTemp);
-
 			orderToShow.add(orderToShowTemp);
 		}
-
 		return orderToShow;
 	}
 
 	@Override
 	public List<Order> placeOrder(List<OrderFromUI> ord) {
 		List<Order> orderPlace = new ArrayList<>();
-		int maxOrderNo = orderRepository.getMaxorderNo()+1;
+		int maxOrderNo = orderRepository.getMaxorderNo() + 1;
 		for (OrderFromUI orderFromUI : ord) {
 			Order orderTemp = new Order();
 			orderTemp.setMerchantId(orderFromUI.getMerchantId());
@@ -76,12 +76,15 @@ public class OrderServiceImpl implements OrderService {
 			orderTemp.setProductPrice(orderFromUI.getProductPrice());
 			orderTemp.setUserEmail(orderFromUI.getUserEmail());
 			orderTemp.setProductId(orderFromUI.getProductId());
-			//TODO set date from server date
-			orderTemp.setOrderDate(orderFromUI.getOrderDate());
+			// TODO set date from server date
+			date = new Date();
+			orderTemp.setOrderDate(dateFormat.format(date));
 
 			orderPlace.add(orderTemp);
+			System.out.println("============");
+			System.out.println("orders form ui : \n" + orderTemp.toString());
+			System.out.println("============");
 		}
-
 		return (List<Order>) orderRepository.save(orderPlace);
 	}
 }

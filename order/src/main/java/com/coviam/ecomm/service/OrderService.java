@@ -11,5 +11,4 @@ public interface OrderService {
 	public List<OrderToShow> findOrderByuserEmail(String userEmail);
 
 	public List<Order> placeOrder(List<OrderFromUI> order);
-
 }

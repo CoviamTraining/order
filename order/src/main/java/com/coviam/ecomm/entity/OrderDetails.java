@@ -14,64 +14,48 @@ public class OrderDetails {
 	public String getProductName() {
 		return productName;
 	}
-
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
 	public String getProductImage() {
 		return productImage;
 	}
-
 	public void setProductImage(String productImage) {
 		this.productImage = productImage;
 	}
-
 	public double getProductRating() {
 		return productRating;
 	}
-
 	public void setProductRating(double productRating) {
 		this.productRating = productRating;
 	}
-
 	public String getMerchantName() {
 		return merchantName;
 	}
-
 	public void setMerchantName(String merchantName) {
 		this.merchantName = merchantName;
 	}
-
 	public double getProductPrice() {
 		return productPrice;
 	}
-
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
-
 	public int getProductQuantity() {
 		return productQuantity;
 	}
-
 	public void setProductQuantity(int productQuantity) {
 		this.productQuantity = productQuantity;
 	}
-
-	
 	public String getOrderDate() {
 		return orderDate;
 	}
-
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	
 	public String getOrderStatus() {
 		return orderStatus;
 	}
-
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
