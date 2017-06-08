@@ -1,6 +1,9 @@
 package com.coviam.ecomm.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,10 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 
 	private RestTemplate restTemplate = new RestTemplate();
+
+	private Date date;
+
+	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 	@Override
 	public List<OrderToShow> findOrderByuserEmail(String userEmail) {
@@ -77,10 +84,14 @@ public class OrderServiceImpl implements OrderService {
 			orderTemp.setUserEmail(orderFromUI.getUserEmail());
 			orderTemp.setProductId(orderFromUI.getProductId());
 			//TODO set date from server date
-			orderTemp.setOrderDate(orderFromUI.getOrderDate());
+            date = new Date();
+			orderTemp.setOrderDate(dateFormat.format(date));
 
 			orderPlace.add(orderTemp);
-		}
+            System.out.println("============");
+            System.out.println("orders form ui : \n" + orderTemp.toString());
+            System.out.println("============");
+        }
 
 		return (List<Order>) orderRepository.save(orderPlace);
 	}
