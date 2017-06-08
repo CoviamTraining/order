@@ -11,4 +11,7 @@ import com.coviam.ecomm.entity.Order;
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 	@Query("select o from Order o where o.userEmail = :userEmail")
 	public ArrayList<Order> findOrderByuserEmail(@Param("userEmail") String userEmail);
+
+	@Query("select max(o.orderNo) from Order o")
+	public int getMaxorderNo();
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+//import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +15,8 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderId;
+	@Column(name = "orderno")
+	private int orderNo;
 	@Column(name = "ProductId")
 	private int productId;
 	@Column(name = "MerchantId")
@@ -32,17 +35,20 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(int productId, int merchantId, String userEmail, int orderQuantity, String orderDate,
-			String orderStatus) {
+	public Order(int orderId, int orderNo, int productId, int merchantId, String userEmail, int orderQuantity,
+			String orderDate, String orderStatus, double productPrice) {
+		this.orderId = orderId;
+		this.orderNo = orderNo;
 		this.productId = productId;
 		this.merchantId = merchantId;
 		this.userEmail = userEmail;
 		this.orderQuantity = orderQuantity;
 		this.orderDate = orderDate;
 		this.orderStatus = orderStatus;
+		this.productPrice = productPrice;
 	}
 
-	public long getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
 
@@ -50,7 +56,15 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public long getProductId() {
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public int getProductId() {
 		return productId;
 	}
 
@@ -58,7 +72,7 @@ public class Order {
 		this.productId = productId;
 	}
 
-	public long getMerchantId() {
+	public int getMerchantId() {
 		return merchantId;
 	}
 
@@ -74,7 +88,7 @@ public class Order {
 		this.userEmail = userEmail;
 	}
 
-	public long getOrderQuantity() {
+	public int getOrderQuantity() {
 		return orderQuantity;
 	}
 
@@ -108,8 +122,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", productId=" + productId + ", merchantId=" + merchantId + ", userEmail="
-				+ userEmail + ", orderQuantity=" + orderQuantity + ", orderDate=" + orderDate + ", orderStatus="
-				+ orderStatus + ", productPrice=" + productPrice + "]";
+		return "Order [orderId=" + orderId + ", orderno=" + orderNo + ", productId=" + productId + ", merchantId="
+				+ merchantId + ", userEmail=" + userEmail + ", orderQuantity=" + orderQuantity + ", orderDate="
+				+ orderDate + ", orderStatus=" + orderStatus + ", productPrice=" + productPrice + "]";
 	}
 }
