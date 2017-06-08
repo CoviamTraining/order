@@ -10,6 +10,8 @@ public class OrderDetails {
 	private int productQuantity;
 	private String orderDate;
 	private String orderStatus;
+	private int merchantId;
+	private int productId;
 
 	public String getProductName() {
 		return productName;
@@ -60,11 +62,25 @@ public class OrderDetails {
 		this.orderStatus = orderStatus;
 	}
 
+	public int getMerchantId() {
+		return merchantId;
+	}
+	public void setMerchantId(int merchantId) {
+		this.merchantId = merchantId;
+	}
+	
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	
 	@Override
 	public String toString() {
 		return "OrderDetails [productName=" + productName + ", productImage=" + productImage + ", productRating="
 				+ productRating + ", merchantName=" + merchantName + ", productPrice=" + productPrice
 				+ ", productQuantity=" + productQuantity + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus
-				+ "]";
+				+ ", merchantId=" + merchantId + ", productId=" + productId + "]";
 	}
 }

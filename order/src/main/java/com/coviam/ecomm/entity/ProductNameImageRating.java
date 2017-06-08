@@ -39,7 +39,7 @@ public class ProductNameImageRating {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ProductNameImageRating [productid=" + productid + ", name=" + name + ", imageurl=" + imageurl

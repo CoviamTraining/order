@@ -54,6 +54,8 @@ public class OrderServiceImpl implements OrderService {
 			orderdDetailTemp.setProductRating(productNameImageRating.getRating());
 			orderdDetailTemp.setOrderDate(order.getOrderDate());
 			orderdDetailTemp.setOrderStatus(order.getOrderStatus());
+			orderdDetailTemp.setMerchantId(order.getMerchantId());
+			orderdDetailTemp.setProductId(order.getProductId());
 			System.out.println(orderdDetailTemp.toString());
 
 			orderToShowTemp.setOrderitems(orderdDetailTemp);
