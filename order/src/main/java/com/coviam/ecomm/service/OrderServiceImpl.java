@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import com.coviam.ecomm.dao.OrderRepository;
@@ -19,11 +20,17 @@ import com.coviam.ecomm.entity.ProductNameImageRating;
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
-
+	
 	private RestTemplate restTemplate = new RestTemplate();
 	private Date date;
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
+	@Value("${productUri}")
+	private String productUri;
+	@Value("${merchantUri}")
+	private String merchantUri;
+	
+	
 	@Override
 	public List<OrderToShow> findOrderByuserEmail(String userEmail) {
 		System.out.println("==========================1");
@@ -40,13 +47,13 @@ public class OrderServiceImpl implements OrderService {
 			orderdDetailTemp.setProductQuantity(order.getOrderQuantity());
 
 			ProductNameImageRating productNameImageRating = restTemplate.getForObject(
-					"http://172.16.20.10:8080/getProductNameImageRating/" + order.getProductId(),
+					productUri+"getProductNameImageRating/" + order.getProductId(),
 					ProductNameImageRating.class);
 			String nameimage = restTemplate.getForObject(
-					"http://172.16.20.10:8080/getProductNameImageRating/" + order.getProductId(), String.class);
+					productUri+"getProductNameImageRating/" + order.getProductId(), String.class);
 
 			String merchantName = restTemplate
-					.getForObject("http://172.16.20.10:8090/getMerchantName/" + order.getMerchantId(), String.class);
+					.getForObject(merchantUri+"getMerchantName/" + order.getMerchantId(), String.class);
 
 			orderdDetailTemp.setMerchantName(merchantName);
 			orderdDetailTemp.setProductImage(productNameImageRating.getImageurl());
@@ -78,7 +85,6 @@ public class OrderServiceImpl implements OrderService {
 			orderTemp.setProductPrice(orderFromUI.getProductPrice());
 			orderTemp.setUserEmail(orderFromUI.getUserEmail());
 			orderTemp.setProductId(orderFromUI.getProductId());
-			// TODO set date from server date
 			date = new Date();
 			orderTemp.setOrderDate(dateFormat.format(date));
 
