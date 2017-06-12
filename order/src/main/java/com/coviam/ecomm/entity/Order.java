@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -32,8 +31,7 @@ public class Order {
 	@Column(name = "ProductPrice")
 	private double productPrice;
 
-	public Order() {
-	}
+	public Order() {}
 
 	public Order(int orderId, int orderNo, int productId, int merchantId, String userEmail, int orderQuantity,
 			String orderDate, String orderStatus, double productPrice) {

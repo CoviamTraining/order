@@ -27,9 +27,14 @@ public class OrderController {
 	@RequestMapping(value = "/placeorder", method = RequestMethod.POST)
 	public String placeOrder(@RequestBody List<OrderFromUI> order)
 			throws JsonParseException, JsonMappingException, IOException {
-		System.out.println("order to add : " + order.toString());
-
+		System.out.println("Order To Add:: " + order.toString());
 		orderService.placeOrder(order);
 		return "Success";
+	}
+
+	@RequestMapping(value = "/updateOrder/{orderId}")
+	public String updateOrder(@PathVariable int orderId) {
+		orderService.updateOrderStatus(orderId);
+		return "Cancelled";
 	}
 }

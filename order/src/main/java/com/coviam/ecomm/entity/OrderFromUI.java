@@ -1,7 +1,5 @@
 package com.coviam.ecomm.entity;
 
-//import javax.persistence.Column;
-
 public class OrderFromUI {
 	private int productId;
 	private int merchantId;
